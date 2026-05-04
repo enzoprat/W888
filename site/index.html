@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>W888 Enalim — Intermédiation Commerciale Agroalimentaire</title>
+<meta name="description" content="W888 Enalim — Intermédiaire commercial indépendant en agroalimentaire, positionné au carrefour de l'Europe et du Maghreb." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<style>
+  :root{
+    --gold:#C9A84C;
+    --gold-light:#E8C97A;
+    --gold-dark:#9A7A2E;
+    --bg:#FFFFFF;
+    --soft:#FAF8F3;
+    --soft2:#F3EFE6;
+    --ink:#1B1C20;
+    --ink-soft:#3C3D42;
+    --muted:#7A786E;
+    --border:rgba(201,168,76,0.22);
+    --border-soft:rgba(27,28,32,0.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight:500;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    height:78px;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 3vw;
+    background:rgba(255,255,255,0.78);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-logo{
+    display:flex;align-items:center;
+  }
+  .nav-logo img{height:48px;width:auto;display:block}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-links a{
+    color:var(--ink);
+    font-size:10px;letter-spacing:0.13em;
+    text-transform:uppercase;
+    opacity:.7;
+    transition:opacity .2s, color .2s;
+    white-space:nowrap;
+  }
+  .nav-links a:hover{opacity:1;color:var(--gold-dark)}
+  .nav-cta{
+    background:transparent;border:1px solid var(--gold);
+    color:var(--gold-dark);
+    padding:8px 16px;font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;cursor:pointer;
+    transition:background .2s, color .2s;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--gold);color:#fff}
+  .hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px}
+  .hamburger span{display:block;width:26px;height:1.5px;background:var(--gold-dark);transition:transform .3s, opacity .3s}
+  .hamburger span + span{margin-top:7px}
+  .hamburger.open span:nth-child(1){transform:translateY(8.5px) rotate(45deg)}
+  .hamburger.open span:nth-child(2){opacity:0}
+  .hamburger.open span:nth-child(3){transform:translateY(-8.5px) rotate(-45deg)}
+  .mobile-nav{
+    position:fixed;top:78px;left:0;right:0;bottom:0;z-index:99;
+    background:rgba(255,255,255,0.98);
+    backdrop-filter:blur(20px);
+    padding:40px 6vw;
+    opacity:0;visibility:hidden;transition:opacity .3s, visibility .3s;
+  }
+  .mobile-nav.open{opacity:1;visibility:visible}
+  .mobile-nav a{
+    display:block;padding:20px 4px;color:var(--ink);
+    font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+    border-bottom:1px solid var(--border-soft);
+    transition:color .2s, padding-left .25s;
+  }
+  .mobile-nav a:hover{color:var(--gold-dark);padding-left:12px}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    height:calc(100vh - 78px);min-height:620px;
+    margin-top:78px;
+    display:flex;align-items:flex-end;
+    padding:0 6vw 10vh;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background-image:url('images/hero.jpg');
+    background-size:cover;background-position:center;
+    z-index:0;
+  }
+  .hero-bg::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(0,0,0,0.10) 0%,rgba(0,0,0,0.55) 100%);
+  }
+  .hero-content{position:relative;z-index:1;color:#fff;max-width:900px}
+  .hero-eyebrow{
+    font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--gold-light);
+    margin-bottom:22px;
+  }
+  .hero-title{
+    font-size:clamp(34px,5.4vw,68px);
+    font-weight:300;
+    line-height:1.08;
+    letter-spacing:-.5px;
+    color:#fff;
+    margin-bottom:24px;
+  }
+  .hero-title em{color:var(--gold-light);font-style:normal;font-weight:400}
+  .hero-sub{
+    font-size:15px;letter-spacing:.04em;
+    color:rgba(255,255,255,0.85);
+    max-width:620px;
+    line-height:1.7;
+  }
+
+  /* ---------- SECTIONS GENERIC ---------- */
+  section{padding:120px 6vw;position:relative}
+  .container{max-width:1240px;margin:0 auto}
+  .eyebrow{
+    font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold-dark);margin-bottom:20px;font-weight:600;
+  }
+  .h2{
+    font-size:clamp(28px,3.6vw,46px);
+    font-weight:300;line-height:1.15;letter-spacing:-.4px;
+    color:var(--ink);margin-bottom:28px;
+  }
+  .h2 em{color:var(--gold-dark);font-style:normal;font-weight:400}
+  .lede{font-size:16px;line-height:1.75;color:var(--ink-soft);max-width:640px}
+  .gold-rule{
+    width:60px;height:1px;background:var(--gold);margin:0 0 28px;
+  }
+
+  /* ---------- SECTION 888 ---------- */
+  .s-888{background:var(--soft)}
+  .s-888 .grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .s-888 .image{
+    position:relative;border-radius:2px;overflow:hidden;
+    aspect-ratio:4/3;
+    box-shadow:0 24px 60px -28px rgba(0,0,0,0.28);
+  }
+  .s-888 .image img{width:100%;height:100%;object-fit:cover}
+  .badge-888{
+    font-size:clamp(60px,8vw,110px);
+    font-weight:700;color:var(--gold);
+    line-height:1;letter-spacing:-2px;
+    margin-bottom:24px;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  }
+  .s-888 p{margin-bottom:18px;font-size:16px;line-height:1.8;color:var(--ink-soft)}
+  .s-888 p:last-child{margin-bottom:0}
+
+  /* ---------- SECTION ABOUT ---------- */
+  .s-about .grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .s-about .image{
+    aspect-ratio:4/3;overflow:hidden;border-radius:2px;
+    box-shadow:0 24px 60px -28px rgba(0,0,0,0.28);
+  }
+  .s-about .image img{width:100%;height:100%;object-fit:cover}
+  .s-about p{margin-bottom:18px;font-size:16px;line-height:1.8;color:var(--ink-soft)}
+
+  /* ---------- SECTION VALUES ---------- */
+  .s-values{background:var(--soft)}
+  .s-values .head{max-width:760px;margin-bottom:60px}
+  .values-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:1px;background:var(--border-soft);
+    border:1px solid var(--border-soft);
+  }
+  .value{
+    background:#fff;padding:42px 34px;
+    transition:background .25s;
+  }
+  .value:hover{background:var(--soft2)}
+  .value-num{
+    font-size:11px;letter-spacing:.3em;color:var(--gold-dark);
+    margin-bottom:16px;font-weight:600;
+  }
+  .value-title{
+    font-size:18px;font-weight:500;color:var(--ink);
+    margin-bottom:14px;line-height:1.3;
+  }
+  .value p{font-size:14px;line-height:1.7;color:var(--ink-soft)}
+
+  /* ---------- SECTION REACH ---------- */
+  .s-reach{padding:0;position:relative;color:#fff;overflow:hidden}
+  .s-reach .bg{
+    position:absolute;inset:0;
+    background-image:url('images/section4.jpg');
+    background-size:cover;background-position:center;
+    z-index:0;
+  }
+  .s-reach .bg::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.4) 100%);
+  }
+  .s-reach .inner{
+    position:relative;z-index:1;
+    padding:140px 6vw;
+    max-width:1240px;margin:0 auto;
+    text-align:center;
+  }
+  .s-reach .h2{color:#fff}
+  .s-reach .h2 em{color:var(--gold-light)}
+  .s-reach .lede{color:rgba(255,255,255,0.85);margin:0 auto}
+  .s-reach .gold-rule{margin:0 auto 28px;background:var(--gold-light)}
+  .s-reach .eyebrow{color:var(--gold-light)}
+
+  /* ---------- CONTACT ---------- */
+  .s-contact{background:#fff}
+  .s-contact .head{max-width:760px;margin-bottom:60px}
+  .s-contact .grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:stretch}
+  .contact-image{
+    position:relative;overflow:hidden;border-radius:2px;
+    min-height:520px;
+    box-shadow:0 24px 60px -28px rgba(0,0,0,0.28);
+  }
+  .contact-image img{
+    width:100%;height:100%;object-fit:cover;
+    position:absolute;inset:0;
+  }
+  .contact-image .overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(0,0,0,0.0) 40%,rgba(0,0,0,0.55) 100%);
+    z-index:1;
+  }
+  .contact-image .info{
+    position:relative;z-index:2;
+    padding:42px 36px;color:#fff;
+    height:100%;display:flex;flex-direction:column;justify-content:flex-end;
+  }
+  .contact-image .label{
+    font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--gold-light);margin-bottom:10px;font-weight:600;
+  }
+  .contact-mail{
+    display:inline-block;
+    font-size:20px;color:#fff;
+    border-bottom:1px solid var(--gold-light);
+    padding-bottom:4px;
+    transition:color .2s, border-color .2s;
+    margin-bottom:30px;
+    align-self:flex-start;
+  }
+  .contact-mail:hover{color:var(--gold-light)}
+  .locations{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:18px 24px;
+    padding-top:24px;border-top:1px solid rgba(255,255,255,0.25);
+  }
+  .loc-name{
+    font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--gold-light);margin-bottom:4px;font-weight:600;
+  }
+  .loc-text{font-size:13px;color:rgba(255,255,255,0.85)}
+
+  /* form */
+  .form-card{
+    background:var(--soft);padding:44px 40px;border:1px solid var(--border);
+    display:flex;flex-direction:column;
+  }
+  .form-card .label{
+    font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--gold-dark);margin-bottom:10px;font-weight:600;
+  }
+  .form-card .form-title{
+    font-size:24px;font-weight:300;color:var(--ink);margin-bottom:30px;line-height:1.3;
+  }
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+  .form-field{display:flex;flex-direction:column;margin-bottom:18px}
+  .form-field label{
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold-dark);margin-bottom:8px;font-weight:600;
+  }
+  .form-field input,
+  .form-field textarea,
+  .form-field select{
+    border:none;border-bottom:1px solid var(--border);
+    background:transparent;
+    padding:8px 0;font-size:15px;
+    font-family:inherit;color:var(--ink);
+    transition:border-color .2s;
+    outline:none;width:100%;
+  }
+  .form-field textarea{resize:vertical;min-height:110px}
+  .form-field input:focus,
+  .form-field textarea:focus,
+  .form-field select:focus{border-bottom-color:var(--gold)}
+  .form-submit{
+    background:var(--gold);border:1px solid var(--gold);
+    color:#fff;padding:14px 28px;font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;cursor:pointer;font-family:inherit;font-weight:600;
+    transition:background .2s, color .2s;
+    margin-top:14px;align-self:flex-start;
+  }
+  .form-submit:hover{background:var(--gold-dark);border-color:var(--gold-dark)}
+  .form-success{
+    display:none;padding:16px;margin-top:16px;
+    background:rgba(201,168,76,0.12);border:1px solid var(--border);
+    font-size:13px;color:var(--ink-soft);
+  }
+  .form-success.show{display:block}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:42px 6vw;border-top:1px solid var(--border-soft);
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:16px;
+    background:#fff;
+  }
+  .footer-logo{display:inline-flex}
+  .footer-logo img{height:36px;display:block}
+  .footer-text{
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  /* ---------- REVEAL ANIMATION ---------- */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease, transform .9s ease}
+  .reveal.in{opacity:1;transform:translateY(0)}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:880px){
+    .nav-links, .nav-cta{display:none}
+    .hamburger{display:block}
+    section{padding:80px 6vw}
+    .s-888 .grid, .s-about .grid, .s-contact .grid{
+      grid-template-columns:1fr;gap:48px;
+    }
+    .form-row{grid-template-columns:1fr}
+    .contact-image{min-height:380px}
+    .locations{grid-template-columns:1fr 1fr}
+    .s-reach .inner{padding:100px 6vw}
+    .hero{padding-bottom:8vh}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#top" class="nav-logo" aria-label="W888 Enalim">
+    <img src="images/logo.jpg" alt="W888 Enalim" />
+  </a>
+  <div class="nav-links">
+    <a href="#about">À propos</a>
+    <a href="#888">Le 888</a>
+    <a href="#values">Valeurs</a>
+    <a href="#reach">Marchés</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#contact" class="nav-cta">Nous contacter</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about">À propos</a>
+  <a href="#888">Le 888</a>
+  <a href="#values">Valeurs</a>
+  <a href="#reach">Marchés</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">W888 Enalim</div>
+    <h1 class="hero-title">Intermédiation <em>Commerciale</em><br/>Agroalimentaire</h1>
+    <p class="hero-sub">Au carrefour de l'Europe et du Maghreb, nous accompagnons industriels et importateurs dans le développement, la négociation et la structuration de leurs réseaux B2B.</p>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section class="s-about" id="about">
+  <div class="container">
+    <div class="grid">
+      <div class="reveal">
+        <div class="eyebrow">Qui sommes-nous</div>
+        <div class="gold-rule"></div>
+        <h2 class="h2">Une structure <em>agile</em> pensée pour les industriels.</h2>
+        <p>Intermédiaire commercial indépendant, créée pour répondre aux besoins spécifiques des industriels et importateurs du secteur agroalimentaire, W888 Enalim est une structure agile et réactive, positionnée au carrefour de l'Europe et du Maghreb.</p>
+        <p>Grâce à une parfaite maîtrise des circuits B2B (industries, grossistes, retail), nous accompagnons nos mandants dans le développement commercial, la négociation stratégique et la structuration de leur réseau de distribution en France, en Espagne et dans toute l'Europe.</p>
+      </div>
+      <div class="image reveal">
+        <img src="images/section3.jpg" alt="W888 Enalim — accompagnement commercial" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 888 -->
+<section class="s-888" id="888">
+  <div class="container">
+    <div class="grid">
+      <div class="image reveal">
+        <img src="images/section2.jpg" alt="888 — symbole d'abondance et de prospérité" />
+      </div>
+      <div class="reveal">
+        <div class="eyebrow">Symbolique</div>
+        <div class="gold-rule"></div>
+        <div class="badge-888">888</div>
+        <p>En numérologie, le nombre <strong>888</strong> est souvent associé à l'abondance, la prospérité et l'harmonie. Il est considéré comme un symbole puissant de manifestation et de succès, tant sur le plan matériel que spirituel.</p>
+        <p>Le nombre <strong>8</strong>, en lui-même, est déjà lié à la richesse et à la réussite dans plusieurs domaines de la vie, et sa répétition en 888 intensifie cette énergie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="s-values" id="values">
+  <div class="container">
+    <div class="head reveal">
+      <div class="eyebrow">Valeurs ajoutées</div>
+      <div class="gold-rule"></div>
+      <h2 class="h2">Pour un mandant <em>industriel</em> ou importateur.</h2>
+      <p class="lede">Une approche pragmatique, alignée sur vos objectifs de volume, de marge et de notoriété, pour ouvrir et structurer durablement vos canaux de distribution.</p>
+    </div>
+    <div class="values-grid reveal">
+      <div class="value">
+        <div class="value-num">01</div>
+        <div class="value-title">Ouverture de nouveaux marchés</div>
+        <p>En Europe, au Maghreb et au Moyen-Orient, avec un accès direct aux acteurs clés de chaque zone.</p>
+      </div>
+      <div class="value">
+        <div class="value-num">02</div>
+        <div class="value-title">Déploiement rapide</div>
+        <p>Auprès des distributeurs, chaînes spécialisées, GMS et acteurs du food service.</p>
+      </div>
+      <div class="value">
+        <div class="value-num">03</div>
+        <div class="value-title">Suivi personnalisé</div>
+        <p>Reporting terrain en temps réel et accompagnement sur-mesure de chaque mandat.</p>
+      </div>
+      <div class="value">
+        <div class="value-num">04</div>
+        <div class="value-title">Approche pragmatique</div>
+        <p>Alignée sur les objectifs de volume, de marge et de notoriété de nos partenaires.</p>
+      </div>
+      <div class="value">
+        <div class="value-num">05</div>
+        <div class="value-title">Compréhension biculturelle</div>
+        <p>Une lecture fine des codes commerciaux qui facilite les échanges internationaux et la fluidité des négociations.</p>
+      </div>
+      <div class="value">
+        <div class="value-num">06</div>
+        <div class="value-title">Réseau B2B maîtrisé</div>
+        <p>Industries, grossistes, retail : une connaissance complète de l'écosystème agroalimentaire.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REACH -->
+<section class="s-reach" id="reach">
+  <div class="bg"></div>
+  <div class="inner reveal">
+    <div class="eyebrow">Présence internationale</div>
+    <div class="gold-rule"></div>
+    <h2 class="h2">De l'Europe au Maghreb,<br/>au cœur des <em>flux commerciaux</em>.</h2>
+    <p class="lede">France, Espagne, Royaume-Uni, Émirats Arabes Unis : un maillage international qui permet à nos mandants de se déployer rapidement, sans frictions logistiques ni culturelles.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="s-contact" id="contact">
+  <div class="container">
+    <div class="head reveal">
+      <div class="eyebrow">Contact</div>
+      <div class="gold-rule"></div>
+      <h2 class="h2">Discutons de votre <em>développement</em>.</h2>
+      <p class="lede">Vous êtes industriel ou importateur du secteur agroalimentaire ? Échangeons sur vos enjeux et la façon dont W888 Enalim peut accélérer votre déploiement commercial.</p>
+    </div>
+    <div class="grid">
+      <div class="contact-image reveal">
+        <img src="images/section5.jpg" alt="W888 Enalim — Contact" />
+        <div class="overlay"></div>
+        <div class="info">
+          <div class="label">Contact commercial</div>
+          <a class="contact-mail" href="mailto:hello@w888.fr">hello@w888.fr</a>
+          <div class="locations">
+            <div>
+              <div class="loc-name">France</div>
+              <div class="loc-text">Siège commercial</div>
+            </div>
+            <div>
+              <div class="loc-name">Espagne</div>
+              <div class="loc-text">Bureau commercial</div>
+            </div>
+            <div>
+              <div class="loc-name">London</div>
+              <div class="loc-text">Bureau de représentation</div>
+            </div>
+            <div>
+              <div class="loc-name">UAE</div>
+              <div class="loc-text">Bureau de représentation</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card reveal" id="contactForm" novalidate>
+        <div class="label">Formulaire</div>
+        <div class="form-title">Envoyez-nous un message.</div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="firstname">Prénom</label>
+            <input type="text" id="firstname" name="firstname" required />
+          </div>
+          <div class="form-field">
+            <label for="lastname">Nom</label>
+            <input type="text" id="lastname" name="lastname" required />
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="company">Société</label>
+          <input type="text" id="company" name="company" />
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-field">
+          <label for="subject">Sujet</label>
+          <select id="subject" name="subject">
+            <option>Demande commerciale</option>
+            <option>Partenariat / Mandat</option>
+            <option>Distribution</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Envoyer le message</button>
+        <div class="form-success" id="formSuccess">Merci, votre message a bien été envoyé. Nous reviendrons vers vous rapidement.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="#top" class="footer-logo"><img src="images/logo.jpg" alt="W888 Enalim" /></a>
+  <div class="footer-text">© W888 Enalim — Intermédiation Commerciale Agroalimentaire</div>
+</footer>
+
+<script>
+  // hamburger
+  const hb = document.getElementById('hamburger');
+  const mn = document.getElementById('mobileNav');
+  hb.addEventListener('click', () => {
+    hb.classList.toggle('open');
+    mn.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-nav a').forEach(a => {
+    a.addEventListener('click', () => {
+      hb.classList.remove('open');
+      mn.classList.remove('open');
+    });
+  });
+
+  // contact form
+  const cf = document.getElementById('contactForm');
+  if (cf) {
+    cf.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const mailto = 'hello@w888.fr';
+      const subject = encodeURIComponent('[W888] ' + (document.getElementById('subject').value || 'Contact'));
+      const body = encodeURIComponent(
+        'Prénom : ' + document.getElementById('firstname').value + '\n' +
+        'Nom : ' + document.getElementById('lastname').value + '\n' +
+        'Société : ' + document.getElementById('company').value + '\n' +
+        'Email : ' + document.getElementById('email').value + '\n\n' +
+        'Message :\n' + document.getElementById('message').value
+      );
+      window.location.href = 'mailto:' + mailto + '?subject=' + subject + '&body=' + body;
+      document.getElementById('formSuccess').classList.add('show');
+    });
+  }
+
+  // reveal
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
