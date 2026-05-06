@@ -14,8 +14,8 @@
     --bg:#FFFFFF;
     --soft:#FAF8F3;
     --soft2:#F3EFE6;
-    --ink:#1B1C20;
-    --ink-soft:#3C3D42;
+    --ink:#000000;
+    --ink-soft:#000000;
     --muted:#7A786E;
     --border:rgba(201,168,76,0.22);
     --border-soft:rgba(27,28,32,0.08);
@@ -236,7 +236,7 @@
   }
   .s-reach .bg::after{
     content:"";position:absolute;inset:0;
-    background:linear-gradient(135deg,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.4) 100%);
+    background:transparent;
   }
   .s-reach .inner{
     position:relative;z-index:1;
@@ -244,11 +244,11 @@
     max-width:1240px;margin:0 auto;
     text-align:center;
   }
-  .s-reach .h2{color:#fff}
+  .s-reach .h2{color:#fff;text-shadow:0 2px 14px rgba(0,0,0,0.5)}
   .s-reach .h2 em{color:var(--gold-light)}
-  .s-reach .lede{color:rgba(255,255,255,0.85);margin:0 auto}
+  .s-reach .lede{color:#fff;margin:0 auto;text-shadow:0 2px 12px rgba(0,0,0,0.55)}
   .s-reach .gold-rule{margin:0 auto 28px;background:var(--gold-light)}
-  .s-reach .eyebrow{color:var(--gold-light)}
+  .s-reach .eyebrow{color:var(--gold-light);text-shadow:0 2px 10px rgba(0,0,0,0.55)}
 
   /* ---------- CONTACT ---------- */
   .s-contact{background:#fff}
@@ -329,6 +329,12 @@
   .form-field input:focus,
   .form-field textarea:focus,
   .form-field select:focus{border-bottom-color:var(--gold)}
+  .form-field input::placeholder,
+  .form-field textarea::placeholder{
+    color:#B8B6AE;
+    font-weight:400;
+    opacity:1;
+  }
   .form-submit{
     background:var(--gold);border:1px solid var(--gold);
     color:#fff;padding:14px 28px;font-size:11px;letter-spacing:.18em;
@@ -409,7 +415,6 @@
   <div class="scroll-hero-bg"></div>
   <div class="scroll-stage">
     <div class="scroll-title-wrap" id="scrollTitle">
-      <p class="scroll-eyebrow">W888 Enalim</p>
       <h1 class="scroll-title">Intermédiation <em>Commerciale</em><br/>Agroalimentaire</h1>
     </div>
     <div class="scroll-card-wrap" id="scrollCardWrap">
@@ -553,20 +558,20 @@
         <div class="form-row">
           <div class="form-field">
             <label for="firstname">Prénom</label>
-            <input type="text" id="firstname" name="firstname" required />
+            <input type="text" id="firstname" name="firstname" placeholder="Jean" required />
           </div>
           <div class="form-field">
             <label for="lastname">Nom</label>
-            <input type="text" id="lastname" name="lastname" required />
+            <input type="text" id="lastname" name="lastname" placeholder="Dupont" required />
           </div>
         </div>
         <div class="form-field">
           <label for="company">Société</label>
-          <input type="text" id="company" name="company" />
+          <input type="text" id="company" name="company" placeholder="Nom de votre société" />
         </div>
         <div class="form-field">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" required />
+          <input type="email" id="email" name="email" placeholder="exemple@gmail.com" required />
         </div>
         <div class="form-field">
           <label for="subject">Sujet</label>
@@ -579,7 +584,7 @@
         </div>
         <div class="form-field">
           <label for="message">Message</label>
-          <textarea id="message" name="message" required></textarea>
+          <textarea id="message" name="message" placeholder="Décrivez-nous brièvement votre besoin…" required></textarea>
         </div>
         <button type="submit" class="form-submit">Envoyer le message</button>
         <div class="form-success" id="formSuccess">Merci, votre message a bien été envoyé. Nous reviendrons vers vous rapidement.</div>
