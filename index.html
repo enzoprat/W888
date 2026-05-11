@@ -257,48 +257,40 @@
   .s-contact{background:#fff}
   .s-contact .head{max-width:760px;margin-bottom:60px}
   .s-contact .grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:stretch}
+  .contact-col{display:flex;flex-direction:column;gap:28px}
   .contact-image{
     position:relative;overflow:hidden;border-radius:2px;
-    min-height:520px;
+    height:340px;
     box-shadow:0 24px 60px -28px rgba(0,0,0,0.28);
   }
   .contact-image img{
-    width:100%;height:100%;object-fit:cover;
-    position:absolute;inset:0;
+    width:100%;height:100%;object-fit:cover;display:block;
   }
-  .contact-image .overlay{
-    position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(0,0,0,0.0) 40%,rgba(0,0,0,0.55) 100%);
-    z-index:1;
+  .contact-below{
+    padding:8px 4px 0;
   }
-  .contact-image .info{
-    position:relative;z-index:2;
-    padding:42px 36px;color:#fff;
-    height:100%;display:flex;flex-direction:column;justify-content:flex-end;
-  }
-  .contact-image .label{
+  .contact-below .label{
     font-size:11px;letter-spacing:.28em;text-transform:uppercase;
-    color:var(--gold-light);margin-bottom:10px;font-weight:600;
+    color:var(--gold-dark);margin-bottom:10px;font-weight:600;
   }
   .contact-mail{
     display:inline-block;
-    font-size:20px;color:#fff;
-    border-bottom:1px solid var(--gold-light);
+    font-size:20px;color:var(--ink);
+    border-bottom:1px solid var(--gold);
     padding-bottom:4px;
     transition:color .2s, border-color .2s;
-    margin-bottom:30px;
-    align-self:flex-start;
+    margin-bottom:28px;
   }
-  .contact-mail:hover{color:var(--gold-light)}
+  .contact-mail:hover{color:var(--gold-dark)}
   .locations{
-    display:grid;grid-template-columns:repeat(2,1fr);gap:18px 24px;
-    padding-top:24px;border-top:1px solid rgba(255,255,255,0.25);
+    display:grid;grid-template-columns:1fr;gap:18px 24px;
+    padding-top:22px;border-top:1px solid var(--border-soft);
   }
   .loc-name{
     font-size:11px;letter-spacing:.28em;text-transform:uppercase;
-    color:var(--gold-light);margin-bottom:4px;font-weight:600;
+    color:var(--gold-dark);margin-bottom:4px;font-weight:600;
   }
-  .loc-text{font-size:13px;color:rgba(255,255,255,0.85)}
+  .loc-text{font-size:14px;color:var(--ink)}
 
   /* form */
   .form-card{
@@ -385,8 +377,7 @@
       grid-template-columns:1fr;gap:48px;
     }
     .form-row{grid-template-columns:1fr}
-    .contact-image{min-height:380px}
-    .locations{grid-template-columns:1fr 1fr}
+    .contact-image{height:280px}
     .s-reach .inner{padding:100px 6vw}
     .hero{padding-bottom:8vh}
   }
@@ -534,28 +525,17 @@
       <p class="lede">Vous êtes industriel ou importateur du secteur agroalimentaire ? Échangeons sur vos enjeux et la façon dont W888 Enalim peut accélérer votre déploiement commercial.</p>
     </div>
     <div class="grid">
-      <div class="contact-image reveal">
-        <img src="images/section5.jpg" alt="W888 Enalim — Contact" />
-        <div class="overlay"></div>
-        <div class="info">
+      <div class="contact-col reveal">
+        <div class="contact-image">
+          <img src="images/section5.jpg" alt="W888 Enalim — Contact" />
+        </div>
+        <div class="contact-below">
           <div class="label">Contact commercial</div>
           <a class="contact-mail" href="mailto:hello@w888.fr">hello@w888.fr</a>
           <div class="locations">
             <div>
               <div class="loc-name">France</div>
               <div class="loc-text">Siège commercial</div>
-            </div>
-            <div>
-              <div class="loc-name">Espagne</div>
-              <div class="loc-text">Bureau commercial</div>
-            </div>
-            <div>
-              <div class="loc-name">London</div>
-              <div class="loc-text">Bureau de représentation</div>
-            </div>
-            <div>
-              <div class="loc-name">UAE</div>
-              <div class="loc-text">Bureau de représentation</div>
             </div>
           </div>
         </div>
