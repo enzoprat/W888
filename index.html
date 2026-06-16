@@ -93,30 +93,25 @@
   }
   .mobile-nav a:hover{color:var(--gold-dark);padding-left:12px}
 
-  /* ---------- HERO (container scroll animation) ---------- */
+  /* ---------- HERO (image naturelle, sans effet scroll) ---------- */
   .scroll-hero{
     position:relative;
     margin-top:78px;
-    height:200vh;
     overflow-anchor:none;
   }
-  .scroll-hero-bg{
-    position:absolute;inset:0;
-    background-image:url('images/hero.jpg');
-    background-size:cover;background-position:center;
-    z-index:0;
+  .scroll-hero-img{
+    display:block;width:100%;height:auto;
   }
-  .scroll-hero-bg::after{
-    content:"";position:absolute;inset:0;
+  .scroll-hero-overlay{
+    position:absolute;inset:0;
     background:linear-gradient(180deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.55) 100%);
+    z-index:1;pointer-events:none;
   }
   .scroll-stage{
-    position:sticky;top:0;
-    height:calc(100vh - 78px);min-height:620px;
+    position:absolute;inset:0;
     display:flex;flex-direction:column;
     align-items:center;justify-content:center;
-    perspective:1000px;
-    z-index:1;
+    z-index:2;
     padding:60px 6vw 40px;
   }
   .scroll-title-wrap{
@@ -156,7 +151,6 @@
       drop-shadow(0 22px 30px rgba(0,0,0,0.45));
   }
   @media (max-width:880px){
-    .scroll-hero{height:180vh}
     .scroll-card img{width:clamp(220px, 60vw, 360px)}
   }
 
@@ -423,7 +417,8 @@
 </div>
 
 <header class="scroll-hero" id="top">
-  <div class="scroll-hero-bg"></div>
+  <img class="scroll-hero-img" src="images/shutterstock_2361366375-climat.jpg?v=2" alt="W888 Enalim — agroalimentaire" />
+  <div class="scroll-hero-overlay"></div>
   <div class="scroll-stage">
     <div class="scroll-title-wrap" id="scrollTitle">
       <h1 class="scroll-title">Intermédiation <em>Commerciale</em><br/>Agroalimentaire</h1>
@@ -664,13 +659,13 @@
     });
   }
 
-  // container scroll animation (Aceternity-style)
+  // container scroll animation (Aceternity-style) — DESACTIVE pour preserver l'image
   const sh = document.querySelector('.scroll-hero');
   const card = document.getElementById('scrollCard');
   const titleWrap = document.getElementById('scrollTitle');
   const isMobile = () => window.matchMedia('(max-width: 880px)').matches;
 
-  if (sh && card) {
+  if (false && sh && card) {
     const ease = (t) => t < 0.5
       ? 2 * t * t
       : 1 - Math.pow(-2 * t + 2, 2) / 2; // easeInOutQuad
